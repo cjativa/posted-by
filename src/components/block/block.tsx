@@ -6,7 +6,7 @@ interface IBlockProps {
 export const Block = ({ children, className }: IBlockProps) => {
 
     return (
-        <div className={`rounded overflow-hidden shadow-lg p-10 ${className}`}>
+        <div className={`rounded overflow-hidden shadow-lg p-16 ${className} bg-white`}>
             {children}
         </div>
     );
