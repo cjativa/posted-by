@@ -5,7 +5,7 @@ import { Button } from '../src/components/button/button';
 
 export default function Home() {
 
-  const [{ }, request] = useAxios({}, { manual: true });
+  const [_, request] = useAxios({}, { manual: true });
 
   const onSignIn = async () => {
     const { data } = await request({ url: 'twitter' });
@@ -36,7 +36,7 @@ export default function Home() {
 
           <p className="text-xl">
             <span className="font-semibold">Posts.by</span> is a one-stop hub for your everyone to find and read your awesome content.
-        </p>
+          </p>
         </div>
 
         <div className="my-4">
@@ -45,7 +45,7 @@ export default function Home() {
             onClick={onSignIn}
           >
             Sign in with Twitter
-        </Button>
+          </Button>
 
         </div>
 
