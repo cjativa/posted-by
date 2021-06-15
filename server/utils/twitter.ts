@@ -5,6 +5,8 @@ import { Config } from './config';
 export const TwitterClient = new Twitter({
     apiKey: Config.twitterApiKey,
     apiSecret: Config.twitterApiSecretKey,
-    accessToken: '284267911-KJVduJaEzWShj14gZNWNhFsKIyBeUc7tkYvgipdX',
-    accessTokenSecret: 'UpbeLuVGIhwMkZiDNfMQfQDo3362ieKxHxOGl5iyUUvEc',
+    accessToken: Config.twitterAccessToken,
+    accessTokenSecret: Config.twitterAccessTokenSecret,
 });
+
+export const TWITTER_API_URL = 'https://api.twitter.com';
