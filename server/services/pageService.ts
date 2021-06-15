@@ -25,10 +25,14 @@ export class PageService {
         // Insert this as the page object
         // and store the threads
         try {
-            await ThreadDAO.createParentThreadPost(conversationId, userId, pageTitle, sluggedTitle);
+            await ThreadDAO.createParentThreadPage(conversationId, userId, pageTitle, sluggedTitle);
             await ThreadDAO.addThreadPosts(threadList, conversationId);
         } catch (error) {
             throw Error(`An error occurred creating a page for your thread ${error.toString()}`)
         }
+    };
+
+    public static async getPages(userId: string) {
+        return await ThreadDAO.getAllThreads(userId);
     };
 };

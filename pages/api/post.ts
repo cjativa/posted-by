@@ -25,7 +25,21 @@ export interface IThreadResponse {
     }
 };
 
-const handler = async (request: NextApiRequest, response: NextApiResponse) => {
+const handler = async (request: NextApiRequest, response: NextApiResponse): Promise<void> => {
+
+    switch (request.method) {
+        case 'GET':
+            return await getPost(request, response);
+        case 'POST':
+            return await createPost(request, response);
+        default:
+            return response
+                .status(405)
+                .end();
+    }
+};
+
+const createPost = async (request: NextApiRequest, response: NextApiResponse): Promise<void> => {
     const tweetIdString = request.body.tweetId;
     const tweetId = TweetHelpers.getTweetId(tweetIdString);
 
@@ -76,7 +90,7 @@ const handler = async (request: NextApiRequest, response: NextApiResponse) => {
             ...data.data.reverse(),
         ];
 
-        PageService.generatePage(tweet.user.id, tweetId, tweetsInOrder);
+        await PageService.generatePage(tweet.user.id, tweetId, tweetsInOrder);
 
         return response
             .status(200)
@@ -85,7 +99,25 @@ const handler = async (request: NextApiRequest, response: NextApiResponse) => {
 
     return response
         .status(404)
-        .json('Could not find a thread for your tweet id')
+        .json('Could not find a thread for your tweet id');
+};
+
+const getPost = async (request: NextApiRequest, response: NextApiResponse): Promise<void> => {
+
+    const { id } = request.query;
+
+    // If there's an id provided, retrieve it
+    if (id) {
+
+    }
+
+    // Otherwise, no id so retrieve them all
+    else {
+        const threads = await PageService.getPages('284267911');
+        return response
+            .status(200)
+            .json(threads);
+    }
 };
 
 export default handler;
