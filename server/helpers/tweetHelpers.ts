@@ -56,9 +56,9 @@ const getFirstLine = (text: string): string => {
         : text.length;
 
     // If the line end is more than 60 characters
-    // we'll cut it short
-    if (lineEnd > 60) {
-        lineEnd = 60;
+    // we'll cut it short at the next space
+    if (lineEnd > 50) {
+        lineEnd = text.indexOf(' ', lineEnd);
     }
 
     return text.substring(0, lineEnd);
