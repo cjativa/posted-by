@@ -90,7 +90,7 @@ const createPost = async (request: NextApiRequest, response: NextApiResponse): P
             ...data.data.reverse(),
         ];
 
-        await PageService.generatePage(tweet.user.id, tweetId, tweetsInOrder);
+        await PageService.generatePage(tweet.user.id, tweetId, tweetsInOrder, tweet.extended_entities?.media);
 
         return response
             .status(200)
