@@ -1,26 +1,53 @@
-import { useState, ChangeEvent } from 'react';
+import { useEffect, useState } from 'react';
+import useAxios from 'axios-hooks';
 
 import { UserLayout } from '../userLayout/userLayout';
-import { Button } from '../../components/button/button';
 import { Block } from '../../components/block/block';
-import { Input } from '../../components/input/input';
-import { FormField } from '../../components/formField/formField';
-
+import { IThread } from '../../../shared/thread';
+import { PostCard } from '../../components/postCard/postCard';
 
 export const Threads = () => {
 
-    const [postId, setPostId] = useState('');
+    const [_, request] = useAxios({}, { manual: true });
+    const [availableThreads, setAvailableThreads] = useState<IThread[]>([]);
 
-    const onPostType = (event: ChangeEvent<HTMLInputElement>) => {
-        setPostId(event.target.value);
-    };
+    useEffect(() => {
+        const fetchThreads = async () => {
+            const { data } = await request({
+                url: 'post',
+                method: 'GET',
+            });
+
+            setAvailableThreads(data);
+        };
+
+        fetchThreads();
+    }, []);
 
     return (
         <UserLayout>
             <Block>
-                <div className="flex flex-col justify-center p-8 gap-y-4 h-3/5">
-                    <p>You don't have any posts at the moment</p>
-                    <p>After you generate a post, it'll show up here! 😁</p>
+                <div className="flex flex-col justify-center gap-y-4 h-3/5">
+
+                    {/** Display threads when available */}
+                    {
+                        availableThreads.map((post) => {
+                            return (
+                                < PostCard
+                                    post={post}
+                                />
+                            );
+                        })
+                    }
+
+                    {/** When no threads are available */}
+                    {availableThreads.length == 0 &&
+                        <>
+                            <p>You don't have any posts at the moment</p>
+                            <p>After you generate a post, it'll show up here! 😁</p>
+                        </>
+                    }
+
                 </div>
             </Block>
         </UserLayout >
