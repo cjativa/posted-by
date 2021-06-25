@@ -26,30 +26,31 @@ export const Threads = () => {
 
     return (
         <UserLayout>
-            <Block>
-                <div className="flex flex-col justify-center gap-y-4 h-3/5">
-
-                    {/** Display threads when available */}
-                    {
-                        availableThreads.map((post) => {
-                            return (
-                                < PostCard
-                                    post={post}
-                                />
-                            );
-                        })
-                    }
+            <div className="col-start-2 col-span-10">
+                <Block>
 
                     {/** When no threads are available */}
                     {availableThreads.length == 0 &&
-                        <>
+                        <div className="flex flex-col justify-center items-center">
                             <p>You don't have any posts at the moment</p>
-                            <p>After you generate a post, it'll show up here! 😁</p>
-                        </>
+                            <p>After you generate a post for your thread, it'll show up here! 😁</p>
+                        </div>
                     }
 
-                </div>
-            </Block>
+                    {/** Display threads when available */}
+                    {availableThreads.length > 0 &&
+                        <div className="grid grid-cols-3 justify-center gap-y-4 h-3/5">
+                            {availableThreads.map((post) => {
+                                return (
+                                    < PostCard
+                                        post={post}
+                                    />
+                                );
+                            })}
+                        </div>
+                    }
+                </Block>
+            </div>
         </UserLayout >
     );
 };

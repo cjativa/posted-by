@@ -28,9 +28,7 @@ export const UserLayout = ({ children }: IUserLayoutProps) => {
             <div className="flex flex-col justify-start items-center w-full h-100">
                 <NavigationBar />
                 <div className="w-full h-full grid grid-cols-12 bg-blue-50 py-8">
-                    <div className="col-start-4 col-span-6">
-                        {children}
-                    </div>
+                    {children}
                 </div>
             </div>
         </div>

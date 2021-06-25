@@ -34,45 +34,46 @@ export const Home = () => {
 
     return (
         <UserLayout>
+            <div className="col-start-4 col-span-6">
+                {/** Tweet input area */}
+                <Block>
+                    <div className="flex flex-col justify-center gap-y-4">
+                        <div className="grid auto-rows-min gap-y-4">
 
-            {/** Tweet input area */}
-            <Block>
-                <div className="flex flex-col justify-center gap-y-4">
-                    <div className="grid auto-rows-min gap-y-4">
+                            <FormField label={'Enter the first tweet in your thread to generate a page for it'}>
+                                <Input
+                                    type={'text'}
+                                    placeholder={'For example, 1400523045434015748'}
+                                    onChange={onPostType}
+                                    value={postId}
+                                />
+                            </FormField>
 
-                        <FormField label={'Enter the first tweet in your thread to generate a page for it'}>
-                            <Input
-                                type={'text'}
-                                placeholder={'For example, 1400523045434015748'}
-                                onChange={onPostType}
-                                value={postId}
-                            />
-                        </FormField>
-
-                        <div>
-                            <Button
-                                className="float-right"
-                                style={'primary'}
-                                onClick={onGenerateClick}
-                            >
-                                Generate my page
-                            </Button>
+                            <div>
+                                <Button
+                                    className="float-right"
+                                    style={'primary'}
+                                    onClick={onGenerateClick}
+                                >
+                                    Generate my page
+                                </Button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </Block>
+                </Block>
 
-            {/** Retrieved tweet block */}
-            {fetchedPost &&
-                <div className="my-20">
+                {/** Retrieved tweet block */}
+                {fetchedPost &&
+                    <div className="my-20">
 
-                    <Block>
-                        <p>Generated a page for your thread ✔️</p>
+                        <Block>
+                            <p>Generated a page for your thread ✔️</p>
 
 
-                    </Block>
-                </div>
-            }
+                        </Block>
+                    </div>
+                }
+            </div>
         </UserLayout>
     );
 };
