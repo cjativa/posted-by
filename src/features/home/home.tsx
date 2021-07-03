@@ -1,7 +1,7 @@
 import { useState, ChangeEvent } from 'react';
 import useAxios from 'axios-hooks';
 
-import { UserLayout } from '../userLayout/userLayout';
+import { AdminLayout } from '../adminLayout/adminLayout';
 import { Button } from '../../components/button/button';
 import { Block } from '../../components/block/block';
 import { Input } from '../../components/input/input';
@@ -33,7 +33,7 @@ export const Home = () => {
     };
 
     return (
-        <UserLayout>
+        <AdminLayout>
             <div className="col-start-4 col-span-6">
                 {/** Tweet input area */}
                 <Block>
@@ -74,6 +74,6 @@ export const Home = () => {
                     </div>
                 }
             </div>
-        </UserLayout>
+        </AdminLayout>
     );
 };

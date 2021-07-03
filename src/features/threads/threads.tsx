@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import useAxios from 'axios-hooks';
 
-import { UserLayout } from '../userLayout/userLayout';
+import { AdminLayout } from '../adminLayout/adminLayout';
 import { Block } from '../../components/block/block';
 import { IThread } from '../../../shared/thread';
 import { PostCard } from '../../components/postCard/postCard';
@@ -25,7 +25,7 @@ export const Threads = () => {
     }, []);
 
     return (
-        <UserLayout>
+        <AdminLayout>
             <div className="col-start-2 col-span-10">
                 <Block>
 
@@ -44,6 +44,7 @@ export const Threads = () => {
                                 return (
                                     < PostCard
                                         post={post}
+                                        link={''}
                                     />
                                 );
                             })}
@@ -51,6 +52,6 @@ export const Threads = () => {
                     }
                 </Block>
             </div>
-        </UserLayout >
+        </AdminLayout >
     );
 };
