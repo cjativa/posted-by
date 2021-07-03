@@ -18,6 +18,7 @@ export class PageService {
         const pageTitle = TweetHelpers.getFirstLine(threadList[0].text);
         const slugged = slugify(pageTitle, {
             lower: true,
+            strict: true,
         });
         const sluggedTitle = `${slugged}-${nanoid(6)}`;
 
