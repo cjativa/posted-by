@@ -2,6 +2,7 @@ import { IThread } from '../../../shared/thread';
 import { IUser } from '../../../shared/user';
 import { PostCard } from '../../components/postCard/postCard';
 import { Block } from '../../components/block/block';
+import { UserLayout } from './userLayout/userLayout';
 
 export interface IUserProps {
     posts: IThread[],
@@ -11,9 +12,9 @@ export interface IUserProps {
 export const User = ({ posts, user }: IUserProps) => {
 
     return (
-        <div className="flex flex-col items-center py-8">
+        <UserLayout>
 
-            <div className="bg-red-100 w-7/12">
+            <div className="w-7/12">
                 <Block>
                     <div className=" grid grid-cols-1 gap-y-4">
 
@@ -41,8 +42,9 @@ export const User = ({ posts, user }: IUserProps) => {
                                     {
                                         posts.map((post) => {
                                             return (
-                                                < PostCard
+                                                <PostCard
                                                     post={post}
+                                                    link={`/${user.handle}/${post.slug}`}
                                                 />
                                             );
                                         })
@@ -54,6 +56,6 @@ export const User = ({ posts, user }: IUserProps) => {
                     </div>
                 </Block>
             </div>
-        </div >
+        </UserLayout >
     );
 };
