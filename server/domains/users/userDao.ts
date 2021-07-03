@@ -17,6 +17,15 @@ export class UserDAO {
         return users.shift();
     };
 
+    public static async findUserByHandle(handle: string): Promise<IUser> {
+        const user = await Knex('registered_users')
+            .select('*')
+            .where({ handle })
+            .first();
+
+        return user;
+    };
+
     public static async registerUser(twitterUserId: string, handle: string, userPictureUrl: string, name: string) {
         await Knex('registered_users')
             .insert({
