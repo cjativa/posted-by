@@ -1,14 +1,15 @@
 import { Knex } from '../../services/database';
 
 export interface IUser {
-    twitterUserId: string,
+    user_picture_url: string,
+    twitter_user_id: string,
     name: string,
     handle: string,
 };
 
 export class UserDAO {
 
-    public static async findUser(id: string) {
+    public static async findUser(id: string): Promise<IUser> {
         const users = await Knex('registered_users')
             .select('*')
             .where({ 'twitter_user_id': id });
@@ -16,11 +17,13 @@ export class UserDAO {
         return users.shift();
     };
 
-    public static async registerUser(twitterUserId: string, handle: string) {
+    public static async registerUser(twitterUserId: string, handle: string, userPictureUrl: string, name: string) {
         await Knex('registered_users')
             .insert({
                 twitter_user_id: twitterUserId,
                 handle,
+                user_picture_url: userPictureUrl,
+                name,
             });
     };
 };
