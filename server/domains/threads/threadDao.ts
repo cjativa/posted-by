@@ -2,8 +2,9 @@ import { Knex } from '../../services/database';
 
 export interface IThreadPost {
     text: string,
-    id: string,
+    tweet_id: string,
     created_at: string,
+    thread_parent_id: string,
 };
 
 export interface IThread {
@@ -35,7 +36,7 @@ export class ThreadDAO {
             .returning('*');
     };
 
-    public static async addThreadPosts(posts: IThreadPost[], parentId: string) {
+    public static async addThreadPosts(posts: any[], parentId: string) {
         const addablePosts = posts.map((post) => {
             return {
                 text: post.text,
@@ -72,9 +73,9 @@ export class ThreadDAO {
         else {
             threadPosts = await Promise.all(
                 foundThreads.map(async (threadParent) => {
-                    return await Knex('thread_posts')
+                    return await Knex<IThreadPost>('thread_posts')
                         .where({
-                            thread_parent_id: threadParent.conversation_id
+                            thread_parent_id: threadParent.conversation_id,
                         })
                         .orderBy('created_at', 'asc');
                 })
@@ -87,5 +88,26 @@ export class ThreadDAO {
         });
 
         return foundThreads;
-    }
+    };
+
+    public static async getThread(slug: string): Promise<IThread | undefined> {
+        const fullThread = await Knex<IThread>('thread_parents')
+            .select('*')
+            .where({ slug })
+            .first();
+
+        // If there was a valid thread for this slug
+        // look up the thread posts
+        if (fullThread) {
+            const threadPosts = await Knex<IThreadPost>('thread_posts')
+                .select('*')
+                .where({
+                    thread_parent_id: fullThread.conversation_id,
+                });
+
+            fullThread['thread_posts'] = threadPosts;
+
+            return fullThread;
+        }
+    };
 };
