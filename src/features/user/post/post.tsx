@@ -10,34 +10,39 @@ export interface IFullPostProps {
 
 export const FullPost = ({ post }: IFullPostProps) => {
 
-    console.log(post.thread_posts);
-
     return (
         <UserLayout>
-
-            <div className="w-7/12">
+            <div className="w-6/12">
                 <Block>
-                    <div className=" grid grid-cols-1">
+                    <div className=" grid grid-cols-1 gap-y-6">
 
                         <Heading>
                             {post.title}
                         </Heading>
 
                         {/** Display each post in the thread */}
-                        {post.thread_posts &&
-                            post.thread_posts.map((threadPost) => {
-                                return (
-                                    <Block paddingX={16} paddingY={8}>
+                        <div className="flex flex-col">
+                            {post.thread_posts &&
+                                post.thread_posts.map((threadPost) => {
+                                    return (
+                                        <div className="grid grid-flow-row auto-rows-min gap-y-8 my-4 w-8/12">
 
-                                        <div
-                                            className="w-7/12 whitespace-pre-line "
-                                            dangerouslySetInnerHTML={{ __html: threadPost.text }}
-                                        />
+                                            <div
+                                                className="whitespace-pre-line leading-6"
+                                                dangerouslySetInnerHTML={{ __html: threadPost.text }}
+                                            />
+                                            <hr style={{
+                                                border: '2px solid #e3e3e3',
+                                                borderRadius: '5px',
+                                                width: '50%',
+                                            }} />
 
-                                    </Block>
-                                )
-                            })
-                        }
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
+
 
                     </div>
                 </Block>
