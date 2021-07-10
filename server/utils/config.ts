@@ -13,4 +13,6 @@ export const Config = {
     databasePassword: process.env.DATABASE_PASSWORD!,
 
     jwtSecret: process.env.JWT_SECRET!,
+
+    nodeEnv: process.env.NODE_ENVIRONMENT! as 'production' | 'development' | 'local',
 };
