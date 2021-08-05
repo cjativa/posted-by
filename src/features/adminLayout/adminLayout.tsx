@@ -22,12 +22,12 @@ export const AdminLayout = ({ children }: IUserLayoutProps) => {
 
 
     return (
-        <div className="flex flex-row">
+        <div className="flex flex-row relative">
             <SideMenu links={ADMIN_LAYOUT_LINKS} />
 
             <div className="flex flex-col justify-start items-center w-full h-100">
                 <NavigationBar />
-                <div className="w-full h-full grid grid-cols-12 bg-blue-50 py-8">
+                <div className="w-full h-full grid grid-cols-12 bg-blue-50 py-8 relative">
                     {children}
                 </div>
             </div>
