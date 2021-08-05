@@ -5,6 +5,12 @@ export interface IThreadPost {
     tweet_id: string,
     created_at: string,
     thread_parent_id: string,
+
+    media?: {
+        media_key: string,
+        type: 'animated_gif' | 'photo' | 'video',
+        url: string,
+    }[],
 };
 
 export interface IThread {
