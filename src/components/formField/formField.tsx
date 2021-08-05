@@ -1,7 +1,7 @@
 interface IFormFieldProps {
-    label: string,
-    children: React.ReactNode,
-};
+    label: string;
+    children: React.ReactNode;
+}
 
 export const FormField = ({ children, label }: IFormFieldProps) => {
     return (
