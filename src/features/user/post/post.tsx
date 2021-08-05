@@ -32,14 +32,29 @@ export const FullPost = ({ post }: IFullPostProps) => {
                         {/** Display each post in the thread */}
                         <div className="flex flex-col">
                             {post.thread_posts &&
-                                post.thread_posts.map((threadPost) => {
+                                post.thread_posts.map((singlePost) => {
+                                    const postText = singlePost
+                                        .text
+                                        .replace(/https:(\/\/t\.co\/([A-Za-z0-9]|[A-Za-z]){10})/g, '');
+
                                     return (
                                         <div className="grid grid-flow-row auto-rows-min gap-y-8 my-4 w-8/12">
 
                                             <div
                                                 className="whitespace-pre-line leading-6"
-                                                dangerouslySetInnerHTML={{ __html: threadPost.text }}
+                                                dangerouslySetInnerHTML={{ __html: postText }}
                                             />
+
+                                            {singlePost.media &&
+                                                singlePost.media?.map((media) => (
+                                                    <img
+                                                        key={media.media_key}
+                                                        src={media.url}
+                                                        className="rounded"
+                                                    />
+                                                ))
+                                            }
+
                                             <hr style={lineStyle} />
 
                                         </div>
