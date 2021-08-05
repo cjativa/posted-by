@@ -7,7 +7,7 @@ interface IUserLayoutProps {
 export const UserLayout = ({ children }: IUserLayoutProps) => {
 
     return (
-        <div className="flex flex-col items-center py-8 bg-red-400 h-full">
+        <div className="flex flex-col items-center py-8 bg-blue-50 h-full">
             {children}
         </div>
     );
