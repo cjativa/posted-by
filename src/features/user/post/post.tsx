@@ -8,6 +8,12 @@ export interface IFullPostProps {
     post: IThread,
 };
 
+const lineStyle = {
+    border: '1px solid #f4ebeb',
+    borderRadius: '5px',
+    width: '50%',
+};
+
 export const FullPost = ({ post }: IFullPostProps) => {
 
     return (
@@ -31,11 +37,7 @@ export const FullPost = ({ post }: IFullPostProps) => {
                                                 className="whitespace-pre-line leading-6"
                                                 dangerouslySetInnerHTML={{ __html: threadPost.text }}
                                             />
-                                            <hr style={{
-                                                border: '2px solid #e3e3e3',
-                                                borderRadius: '5px',
-                                                width: '50%',
-                                            }} />
+                                            <hr style={lineStyle} />
 
                                         </div>
                                     )
