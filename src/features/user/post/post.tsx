@@ -19,12 +19,15 @@ export const FullPost = ({ post }: IFullPostProps) => {
     return (
         <UserLayout>
             <div className="w-6/12">
-                <Block>
-                    <div className=" grid grid-cols-1 gap-y-6">
-
+                <Block paddingX={0} paddingY={0}>
+                    <div className={`bg-${post.theme_color}-400 h-80 w-full flex justify-center items-center`}>
                         <Heading>
                             {post.title}
                         </Heading>
+                    </div>
+
+                    <div className="grid grid-cols-1 gap-y-6 px-16 py-16">
+
 
                         {/** Display each post in the thread */}
                         <div className="flex flex-col">
@@ -40,7 +43,7 @@ export const FullPost = ({ post }: IFullPostProps) => {
                                             <hr style={lineStyle} />
 
                                         </div>
-                                    )
+                                    );
                                 })
                             }
                         </div>
