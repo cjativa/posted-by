@@ -5,7 +5,7 @@ export const NavigationBar = () => {
             <ul className="flex flex-row items-center">
 
                 <li className="mr-6">
-                    <span className="text-blue-500">Ideas.by</span>
+                    <span className="text-blue-500">Postedd.by</span>
                 </li>
                 <li className="mr-6">
                     <a className="text-blue-500 hover:text-blue-800" href="#">Link</a>
