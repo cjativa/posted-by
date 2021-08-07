@@ -51,7 +51,6 @@ export const PostCard = ({ post, link, authorImageUrl, authorHandle, authorName,
 
     return (
         <div className={`flex flex-col`}>
-
             <div className="flex flex-col h-full border-2 border-gray-200 border-opacity-60 rounded-lg lg:w-80 shadow-lg">
 
                 {/** Upper section - color cover */}
@@ -67,7 +66,7 @@ export const PostCard = ({ post, link, authorImageUrl, authorHandle, authorName,
                             <hr style={lineStyle} />
                         </div>
 
-                        <h1 className="title-font text-xl font-medium text-gray-900 mb-3">
+                        <h1 className="title-font text-xl font-semibold text-gray-900 mb-3">
                             {title}
                         </h1>
 
