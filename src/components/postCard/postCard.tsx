@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { IThread } from '../../../shared/thread';
+import { FormatDate } from '../../util/formateDate';
 import { Avatar } from '../avatar/avatar';
 
 interface IPostCardProps {
@@ -41,11 +42,7 @@ export const PostCard = ({ post, link, authorImageUrl, authorHandle, authorName,
             setShortDescription(description);
         }
 
-        // Make the date into a short format like "April 21, 2021"
-        const date = new Date(post.created_at);
-        const month = date.toLocaleString('default', { month: 'long' });
-        const dateFormatted = `${month} ${date.getDate()}, ${date.getFullYear()}`;
-
+        const dateFormatted = FormatDate(post.created_at);
         setShortDate(dateFormatted);
 
     }, []);
@@ -53,7 +50,7 @@ export const PostCard = ({ post, link, authorImageUrl, authorHandle, authorName,
 
 
     return (
-        <div className={``}>
+        <div className={`flex flex-col`}>
 
             <div className="flex flex-col h-full border-2 border-gray-200 border-opacity-60 rounded-lg lg:w-80 shadow-lg">
 
@@ -78,10 +75,12 @@ export const PostCard = ({ post, link, authorImageUrl, authorHandle, authorName,
                             {shortDescription}
                         </p>
 
+                        {/** Display the date the post was created and author information, if available */}
                         <div className="flex flex-row gap-x-4 justify-between">
                             <span className="tracking-widest text-xs title-font font-medium text-gray-400 self-end">
                                 {shortDate}
                             </span>
+
                             {authorImageUrl && authorHandle && authorName &&
                                 <div className="inline-flex gap-x-2">
                                     <Avatar
@@ -96,10 +95,13 @@ export const PostCard = ({ post, link, authorImageUrl, authorHandle, authorName,
                                 </div>
                             }
                         </div>
-
                     </div>
                 </a>
             </div>
-        </div >
+
+            {/** Displays aggregate statistics about the post */}
+            {/* <div className="w-1/5 h-10 bg-gray-200 self-end mr-1 mt-1">
+            </div> */}
+        </div>
     );
 };
