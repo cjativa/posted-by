@@ -12,6 +12,10 @@ const ADMIN_LAYOUT_LINKS = [
         label: 'Threads',
         href: 'threads'
     },
+    {
+        label: 'Categories',
+        href: 'categories'
+    }
 ];
 
 interface IUserLayoutProps {
