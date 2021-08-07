@@ -5,8 +5,8 @@ import { UserDAO } from '../../server/domains/users/userDao';
 import { TWITTER_API_URL } from '../../server/utils/twitter';
 import { ThreadDAO } from '../../shared/thread';
 import { PageService } from '../../server/services/pageService';
-import { FullPost } from '../../src/features/user/post/post';
-import { IFullPostProps } from '../../src/features/user/post/post';
+import { FullPost } from '../../src/features/user/fullPost/fullPost';
+import { IFullPostProps } from '../../src/features/user/fullPost/fullPost';
 import axios from 'axios';
 
 interface ITweetMedia {
@@ -26,9 +26,9 @@ interface ITweetMedia {
     }
 };
 
-const ThreadPage = ({ post }: IFullPostProps) => {
+const ThreadPage = ({ post, author, }: IFullPostProps) => {
     return (
-        <FullPost post={post} />
+        <FullPost post={post} author={author} />
     );
 };
 
@@ -37,13 +37,11 @@ export default ThreadPage;
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const postSlug = (context.query && context.query['slug'])
         ? context.query['slug'].toString()
-        : null;
+        : '';
+    const post = await ThreadDAO.getThread(postSlug);
 
-    console.log(postSlug);
-
-
-    if (postSlug) {
-        const post = await ThreadDAO.getThread(postSlug);
+    if (postSlug && post) {
+        const author = await UserDAO.findUser('284267911'/* post?.user_id */);
 
         // For each post in the thread
         // we'll retrieve the image/media/links/etc. for it
@@ -99,6 +97,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
             return {
                 props: {
                     post,
+                    author,
                 }
             }
         }
